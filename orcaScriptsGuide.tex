@@ -51,8 +51,69 @@ Orca scripts general introduction
 \subsection{Settings on the MTC/D}
 \subsection{Starting and stopping a run}
 
-\section{Function List}
-Function list broken down by model 
+\section{Orca Script Reference}
+\subsection{MTC/D}
+\textbf{ - (void) initializeMtc:(BOOL) loadTheMTCXilinxFile load10MHzClock:(BOOL) loadThe10MHzClock}
+\newline\newline
+This function initializes the MTC/D. You want to almost always initialize with the Xlinix file and load the 10Mhz clock. This sets all the registers on the MTC/D to a safe initial state. Always call this function before a run and before setting anything on the MTC/D. 
+\newline\newline 
+Example usage:\newline
+\texttt{[mtcObject initializeMtc:YES  load10MHzClock:YES];}
+\newline\newline
+\textbf{- (void) clearGlobalTriggerWordMask}
+\newline\newline
+Clears the global Trigger Word Mask on the MTC/D. It actually sets the MtcMask Register to 0. 
+\newline\newline
+Example usage:\newline
+\texttt{[mtcObject clearGlobalTriggerWordMask];}
+\newline\newline
+\textbf{- (unsigned long) getMTC$\mathunderscore$GTWordMask}
+\newline\newline
+Reads the current global Trigger Word Mask and returns this as an unsigned long in hexidecimal\newline\newline
+Example usage:\newline
+\texttt{unsigned long gtWordMask  =[mtcObject getMTC$\mathunderscore$GTWordMask];}
+\newline\newline
+\textbf{- (void) clearPedestalCrateMask}
+\newline\newline
+Clears the Pedestal Crate Mask on the MTC/D. This actually sets the MtcPmsk Register to 0. 
+\newline\newline
+Example usage:\newline
+\texttt{[mtcObject clearPedestalCrateMask];}
+\newline\newline
+\textbf{- (void) clearGTCrateMask}
+\newline\newline
+Clears the Global Trigger Crate Mask on the MTC/D. This actually sets the MtcGmsk Register to 0.  
+\newline\newline
+Example usage:\newline
+\texttt{[mtcObject clearGTCrateMask];}
+\newline\newline
+\textbf{- (void) resetTheMemory}
+\newline\newline
+Resets the MTC/D memory, the fifo write pointer and the BBA Register 
+\newline\newline
+Example usage:\newline
+\texttt{[mtcObject resetTheMemory];}
+\newline\newline
+\textbf{- (double) get10MHzSeconds}
+\newline\newline
+Get the 10MHz clock time expressed in seconds relative to SNO time zero. This returns a double value. 
+\newline\newline
+Example usage:\newline
+\texttt{double timeSinceSNOZeroInSeconds = [mtcObject  get10MHzSeconds];}
+\newline\newline
+\textbf{- (unsigned long) getMtcTime}
+\newline\newline
+Get the 10MHz clock time expressed in seconds since 01/01/1996 GMT
+\newline\newline
+Example usage:\newline
+\texttt{unsigned long time = [mtcObject  getMtcTime];}
+\newline\newline
+
+
+%\begin{itemize}
+%\item \textbf{ - (void) initializeMtc:(BOOL) loadTheMTCXilinxFile load10MHzClock:(BOOL) loadThe10MHzClock}
+%\end{itemize}
+
 
 %\section{Future work} 
 
